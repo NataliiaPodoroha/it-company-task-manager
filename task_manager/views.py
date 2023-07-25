@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from task_manager.forms import PositionSearchForm, TaskTypeSearchForm, TaskSearchForm, TaskForm
-from task_manager.models import Worker, Task, TaskType, Position, Tag
+from task_manager.models import Worker, Task, TaskType, Position
 
 
 @login_required
@@ -17,7 +17,6 @@ def index(request):
     num_tasks = Task.objects.count()
     num_task_types = TaskType.objects.count()
     num_positions = Position.objects.count()
-    num_tags = Tag.objects.count()
 
     num_visits = request.session.get("num_visits", 0)
     request.session["num_visits"] = num_visits + 1
@@ -27,7 +26,6 @@ def index(request):
         "num_tasks": num_tasks,
         "num_task_types": num_task_types,
         "num_positions": num_positions,
-        "num_tags": num_tags,
         "num_visits": num_visits + 1,
     }
 

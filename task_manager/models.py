@@ -39,10 +39,6 @@ class Worker(AbstractUser):
         return f"{self.username} ({self.first_name} {self.last_name})"
 
 
-class Tag(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-
-
 class Task(models.Model):
     PRIORITIES = [
         ("Urgent", "Urgent"),
@@ -67,10 +63,6 @@ class Task(models.Model):
     )
     assignees = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        related_name="tasks"
-    )
-    tags = models.ManyToManyField(
-        Tag,
         related_name="tasks"
     )
 
