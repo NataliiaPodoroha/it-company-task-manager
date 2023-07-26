@@ -14,7 +14,7 @@ class PositionSearchForm(forms.Form):
 
 
 class TaskForm(forms.ModelForm):
-    workers = forms.ModelMultipleChoiceField(
+    assignees = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
