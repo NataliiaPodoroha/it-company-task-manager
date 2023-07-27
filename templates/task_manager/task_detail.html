@@ -11,7 +11,7 @@
       Update
     </a>
   </h1>
-  <p>Name: {{ task.task_type.name }}</p>
+  <p>Type: {{ task.task_type.name }}</p>
   <h1>
     Workers:
 
@@ -32,4 +32,7 @@
       <li>{{ worker.username }} ({{ worker.first_name }} {{ worker.last_name }})</li>
     {% endfor %}
   </ul>
+  <hr>
+  <h1>Description:</h1>
+    {{ task.description }}
 {% endblock %}
