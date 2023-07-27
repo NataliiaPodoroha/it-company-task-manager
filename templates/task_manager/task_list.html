@@ -14,7 +14,6 @@
   {% if task_list %}
   <table class="table">
     <tr>
-      <th>ID</th>
       <th>Name</th>
       <th>Deadline</th>
       <th>Status</th>
@@ -23,15 +22,19 @@
     </tr>
   {% for task in task_list %}
     <tr>
-      <td><a href="{% url "task_manager:task-detail" pk=task.id %} ">{{ task.id }}</a></td>
-      <td>{{ task.name }}</td>
+      <td><a href="{{ task.get_absolute_url }}">{{ task.name }}</a></td>
       <td>{{ task.deadline }}</td>
-      <td>{{ task.is_completed }}</td>
+      <td>
+        {% if task.is_completed == False %}
+          Not completed
+        {% else %}
+          Completed
+        {% endif %}
+      </td>
       <td>{{ task.priority }}</td>
       <td>{{ task.task_type.name }}</td>
     </tr>
   {% endfor %}
-
   </table>
   {% else %}
     <p>There are no task in the company!</p>
