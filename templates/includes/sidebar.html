@@ -9,9 +9,8 @@
   <br>
 
   <li class="list-group-item"><a href="{% url 'task_manager:index' %}">Home</a></li>
-  <li class="list-group-item"><a href="#">All workers</a></li>
+  <li class="list-group-item"><a href="{% url 'task_manager:worker-list' %}">All workers</a></li>
   <li class="list-group-item"><a href="{% url 'task_manager:task-list' %}">All tasks</a></li>
   <li class="list-group-item"><a href="{% url 'task_manager:task-type-list' %}">All task types</a></li>
   <li class="list-group-item"><a href="{% url 'task_manager:position-list' %}">All positions</a></li>
-  <li class="list-group-item"><a href="#">All tags</a></li>
 </ul>
