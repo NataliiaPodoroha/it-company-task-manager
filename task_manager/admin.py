@@ -5,9 +5,9 @@ from task_manager.models import Worker, TaskType, Position, Task
 
 @admin.register(Worker)
 class WorkerAdmin(UserAdmin):
-    list_display = UserAdmin.list_display + ("position",)
+    list_display = UserAdmin.list_display + ("position", "phone_number")
     fieldsets = UserAdmin.fieldsets + (
-        (("Additional info", {"fields": ("position",)}),)
+        (("Additional info", {"fields": ("position", "phone_number")}),)
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
         (
@@ -18,6 +18,7 @@ class WorkerAdmin(UserAdmin):
                         "first_name",
                         "last_name",
                         "position",
+                        "phone_number",
                     )
                 },
             ),

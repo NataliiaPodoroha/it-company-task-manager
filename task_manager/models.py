@@ -25,6 +25,7 @@ class Position(models.Model):
 
 
 class Worker(AbstractUser):
+    phone_number = models.CharField(max_length=255, unique=True, null=True)
     position = models.ForeignKey(
         Position,
         on_delete=models.CASCADE,

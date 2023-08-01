@@ -14,19 +14,19 @@
     {% if worker_list %}
     <table class="table">
       <tr>
-        <th>ID</th>
         <th>Username</th>
         <th>First name</th>
         <th>Last name</th>
         <th>Position</th>
+        <th>Phone number</th>
       </tr>
     {% for worker in worker_list %}
       <tr>
-        <td>{{ worker.id }}</td>
         <td><a href="{{ worker.get_absolute_url }}">{{ worker.username }} {% if user == worker %} (Me){% endif %}</a></td>
         <td>{{ worker.first_name }}</td>
         <td>{{ worker.last_name }}</td>
         <td>{{ worker.position.name }}</td>
+        <td>{{ worker.phone_number }}</td>
       </tr>
     {% endfor %}
 
