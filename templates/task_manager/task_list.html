@@ -1,42 +1,51 @@
-{% extends "base.html" %}
+{% extends "base_new.html" %}
 
 {% block content %}
-  <h1>
-    Task list
-    <a href="{% url 'task_manager:task-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-  </h1>
-  {% block search %}
-    {% include "includes/search.html" %}
-  {% endblock %}
-  <br>
-  {% if task_list %}
-  <table class="table">
-    <tr>
-      <th>Name</th>
-      <th>Deadline</th>
-      <th>Status</th>
-      <th>Priority</th>
-      <th>Task type</th>
-    </tr>
-  {% for task in task_list %}
-    <tr>
-      <td><a href="{{ task.get_absolute_url }}">{{ task.name }}</a></td>
-      <td>{{ task.deadline }}</td>
-      <td>
-        {% if task.is_completed == False %}
-          Not completed
-        {% else %}
-          Completed
-        {% endif %}
-      </td>
-      <td>{{ task.priority }}</td>
-      <td>{{ task.task_type.name }}</td>
-    </tr>
-  {% endfor %}
-  </table>
-  {% else %}
-    <p>There are no task in the company!</p>
-  {% endif %}
+  {% include "includes/navigation.html" %}
+  <header class="section-height-25">
+  </header>
+  <div class="container">
+    <h1>
+      Task List
+      <a href="{% url 'task_manager:task-create' %}" class="btn bg-gradient-secondary w-auto me-5 m-3 float-end">
+        Create
+      </a>
+    </h1>
+    <br>
+    {% block search %}
+      {% include "includes/search.html" %}
+    {% endblock %}
+    <br>
+    {% if task_list %}
+
+    <table class="table">
+      <tr>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 30%">Name</th>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 18%">Deadline</th>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 20%">Status</th>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 16%">Priority</th>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 16%">Task type</th>
+      </tr>
+    {% for task in task_list %}
+      <tr>
+        <td><a href="{{ task.get_absolute_url }}">{{ task.name }}</a></td>
+        <td>{{ task.deadline }}</td>
+        <td>
+          {% if task.is_completed == False %}
+            Not completed
+          {% else %}
+            Completed
+          {% endif %}
+        </td>
+        <td>{{ task.priority }}</td>
+        <td>{{ task.task_type.name }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+    {% include "includes/pagination.html" %}
+    {% else %}
+      <p>There are no tasks in the company.</p>
+    {% endif %}
+  </div>
 {% endblock %}
+
