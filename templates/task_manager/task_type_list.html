@@ -1,49 +1,50 @@
-{% extends "base.html" %}
+{% extends "base_new.html" %}
 
 {% block content %}
-  <h1>
-    Task Type List
-    <a href="{% url 'task_manager:task-type-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-  </h1>
-  {% block search %}
-    {% include "includes/search.html" %}
-  {% endblock %}
-  <br>
-  {% if task_type_list %}
+  {% include "includes/navigation.html" %}
+  <header class="section-height-25">
+  </header>
+  <div class="container">
+    <h1>
+      Task Type List
+      <a href="{% url 'task_manager:task-type-create' %}" class="btn bg-gradient-secondary w-auto me-5 m-3 float-end">
+        Create
+      </a>
+    </h1>
+    <br>
+    {% block search %}
+      {% include "includes/search.html" %}
+    {% endblock %}
+    <br>
+    {% if task_type_list %}
     <table class="table">
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 10%">ID</th>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 60%">Name</th>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 17%">Update</th>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 13%">Delete</th>
       </tr>
-
-      {% for type in task_type_list %}
-        <tr>
-          <td>
-              {{ type.id }}
-          </td>
-          <td>
-              {{ type.name }}
-          </td>
-          <td>
-            <a href="{% url 'task_manager:task-type-update' pk=type.id %}">
-              Update
-            </a>
-          </td>
-          <td>
-            <a style="color: red"
-              href="{% url 'task_manager:task-type-delete' pk=type.id %}">
-              Delete
-            </a>
-          </td>
-        </tr>
-      {% endfor %}
+    {% for type in task_type_list %}
+      <tr>
+        <td>{{ type.id }}</td>
+        <td>{{ type.name }}</td>
+        <td>
+          <a href="{% url 'task_manager:task-type-update' pk=type.id %}" class="btn bg-gradient-info w-auto me-2 mb-0">
+            Update
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'task_manager:task-type-delete' pk=type.id %}" class="btn bg-gradient-light w-auto me-2 mb-0">
+            Delete
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
     </table>
-
-  {% else %}
+    {% include "includes/pagination.html" %}
+    {% else %}
       <p>There are no task types in the company.</p>
-  {% endif %}
+    {% endif %}
+  </div>
 {% endblock %}
+
