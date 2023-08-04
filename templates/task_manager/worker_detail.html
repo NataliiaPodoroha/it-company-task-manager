@@ -1,32 +1,91 @@
-{% extends "base.html" %}
+{% extends "base_new.html" %}
+
+{% block title %} {{ worker.username }} {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} blog-author bg-gray-100 {% endblock body_class %}
 
 {% block content %}
-  <h1>
-    Username: {{ worker.username }}
-    <a href="{% url 'task_manager:worker-delete' pk=worker.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
 
-    <a href="{% url 'task_manager:worker-update' pk=worker.id %}" class="btn btn-secondary link-to-page">
-      Update
-    </a>
-  </h1>
+  {% include "includes/navigation.html" %}
 
-  <p><strong>First name:</strong> {{ worker.first_name }}</p>
-  <p><strong>Last name:</strong> {{ worker.last_name }}</p>
-  <p><strong>Position:</strong> {{ worker.position.name }}</p>
-  <p><strong>Phone number:</strong> {{ worker.phone_number }}</p>
+  <section class="py-sm-5 py-5 position-relative">
 
-  <div class="ml-3">
-    <h4>Tasks</h4>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <div class="row pt-7">
+            <h1>
+              {{ worker.first_name }} {{ worker.last_name }}
+              <div class="me-4 m-3 float-end">
+                <a href="{% url 'task_manager:worker-update' pk=worker.id %}" class="btn btn-sm btn-outline-info w-auto">
+                  Update
+                </a>
+                <a href="{% url 'task_manager:worker-delete' pk=worker.id %}" class="btn btn-sm btn-outline-secondary w-auto">
+                  Delete
+                </a>
+              </div>
+            </h1>
+          </div>
+          <div class="row mb-4">
+            <div class="col-auto">
+              <span>Position:</span>
+              <span class="h6">{{ worker.position.name }}</span>
+            </div>
+            <div class="col-auto">
+              <span>Phone number:</span>
+              <span class="h6">{{ worker.phone_number }}</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <h3 class="mb-5 text-gradient text-primary">Tasks:</h3>
+      </div>
+    </div>
 
     {% for task in worker.tasks.all %}
-      <hr>
-      <p><strong>Name:</strong> {{ task.name }}</p>
-      <p><strong>Priority:</strong> {{ task.priority }}</p>
-      <p><strong>Deadline:</strong> {{ task.deadline }}</p>
+
+      <div class="card-body position-relative border-radius-xl overflow-hidden shadow-lg mb-7">
+        <h5 class="lead text-dark">{{ task.name }}
+          {% if task.is_completed == False %}
+            <p class="card-text float-end"><small class="text-primary">Not completed</small></p>
+          {% else %}
+            <p class="card-text float-end"><small class="text-success">Completed</small></p>
+          {% endif %}
+        </h5>
+        <hr>
+        <p class="card-text">
+          {{ task.description }}
+          <a href="{{ task.get_absolute_url }}" class="text-info icon-move-right">
+            More about task
+            <i class="fas fa-arrow-right text-sm ms-1"></i>
+          </a>
+        </p>
+        <p class="card-text">
+          <small class="text-muted">Deadline: </small>
+          <small class="text-dark">{{ task.deadline }}</small>
+        </p>
+      </div>
+
     {% empty %}
-      <p>No tasks!</p>
+      <p>No Tasks!</p>
     {% endfor %}
   </div>
-{% endblock %}
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+  <script src="/static/assets/js/soft-design-system.min.js?v=1.0.1" type="text/javascript"></script>
+
+{% endblock javascripts %}
