@@ -1,12 +1,17 @@
-{% extends "base.html" %}
+{% extends "base_new.html" %}
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>{{ object|yesno:"Update,Create" }} task</h1>
-  <form action="" method="post" novalidate>
-    {% csrf_token %}
-    {{ form|crispy }}
+  {% include "includes/navigation.html" %}
+  <section class="pt-9 position-relative">
+    <div class="container">
+      <h1 class="pb-3">{{ object|yesno:"Update,Create" }} task</h1>
+      <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
 
-    <input type="submit" value="Submit" class="btn btn-primary">
-  </form>
+        <input type="submit" value="Submit" class="btn bg-gradient-primary">
+      </form>
+    </div>
+  </section>
 {% endblock %}
