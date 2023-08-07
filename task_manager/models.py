@@ -72,7 +72,7 @@ class Task(models.Model):
     )
 
     class Meta:
-        ordering = ["is_completed"]
+        ordering = ["is_completed", "priority"]
 
     def __str__(self):
         return f"{self.name} (Priority: {self.priority})"
