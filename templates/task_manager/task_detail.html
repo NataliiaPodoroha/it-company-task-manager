@@ -1,4 +1,4 @@
-{% extends "base_new.html" %}
+{% extends "base.html" %}
 
 {% block title %} {{ task.id }} {% endblock title %}
 
@@ -17,17 +17,21 @@
       <div class="row">
         <div class="col-12 mx-auto">
           <div class="row pt-7">
-            <h1>
-              {{ task.name }}
-              <div class="me-4 m-3 float-end">
-                <a href="{% url 'task_manager:task-update' pk=task.id %}" class="btn btn-sm btn-outline-info w-auto">
-                  Update
-                </a>
-                <a href="{% url 'task_manager:task-delete' pk=task.id %}" class="btn btn-sm btn-outline-secondary w-auto">
-                  Delete
-                </a>
+
+            <div class="col-md-9 col-sm-6 col-6 mb-4">
+              <h1>{{ task.name }}</h1>
+            </div>
+            <div class="col-md-3 col-sm-6 col-6 mb-4">
+              <div class="m-3">
+              <a href="{% url 'task_manager:task-update' pk=task.id %}" class="btn btn-sm btn-outline-info w-auto">
+                Update
+              </a>
+              <a href="{% url 'task_manager:task-delete' pk=task.id %}" class="btn btn-sm btn-outline-secondary w-auto">
+                Delete
+              </a>
               </div>
-            </h1>
+            </div>
+
           </div>
           <div class="row mb-4">
             <div class="col-auto">
