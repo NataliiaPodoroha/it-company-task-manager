@@ -5,8 +5,16 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from task_manager.forms import PositionSearchForm, TaskTypeSearchForm, TaskSearchForm, TaskForm, WorkerSearchForm, \
-    WorkerCreationForm, WorkerUpdateForm
+from task_manager.forms import (
+    PositionSearchForm,
+    TaskTypeSearchForm,
+    TaskSearchForm,
+    TaskForm,
+    WorkerSearchForm,
+    WorkerCreationForm,
+    WorkerUpdateForm
+)
+
 from task_manager.models import Worker, Task, TaskType, Position
 
 
@@ -179,7 +187,9 @@ def toggle_assign_to_task(request, pk):
         worker.tasks.remove(pk)
     else:
         worker.tasks.add(pk)
-    return HttpResponseRedirect(reverse_lazy("task_manager:task-detail", args=[pk]))
+    return HttpResponseRedirect(
+        reverse_lazy("task_manager:task-detail", args=[pk])
+    )
 
 
 class WorkerListView(LoginRequiredMixin, generic.ListView):

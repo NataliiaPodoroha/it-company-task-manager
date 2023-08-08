@@ -32,7 +32,9 @@ class AdminSiteTests(TestCase):
         self.assertContains(res, self.worker.phone_number)
 
     def test_worker_detailed_phone_number_listed(self):
-        url = reverse("admin:task_manager_worker_change", args=[self.worker.id])
+        url = reverse(
+            "admin:task_manager_worker_change", args=[self.worker.id]
+        )
         res = self.client.get(url)
 
         self.assertContains(res, self.worker.phone_number)

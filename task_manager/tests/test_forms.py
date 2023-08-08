@@ -201,7 +201,8 @@ class SearchFormTests(TestCase):
         expected_result = Position.objects.filter(name="Designer")
 
         response = self.client.get(
-            reverse("task_manager:position-list") + "?name=" + form_data["name"]
+            reverse(
+                "task_manager:position-list") + "?name=" + form_data["name"]
         )
         self.assertEqual(
             list(response.context["position_list"]), list(expected_result)
@@ -216,7 +217,9 @@ class SearchFormTests(TestCase):
         expected_result = TaskType.objects.filter(name="New feature")
 
         response = self.client.get(
-            reverse("task_manager:task-type-list") + "?name=" + form_data["name"]
+            reverse(
+                "task_manager:task-type-list"
+            ) + "?name=" + form_data["name"]
         )
         self.assertEqual(
             list(response.context["task_type_list"]), list(expected_result)
@@ -233,7 +236,9 @@ class SearchFormTests(TestCase):
         )
 
         response = self.client.get(
-            reverse("task_manager:worker-list") + "?username=" + form_data["username"]
+            reverse(
+                "task_manager:worker-list"
+            ) + "?username=" + form_data["username"]
         )
         self.assertEqual(
             list(response.context["worker_list"]), list(expected_result)
