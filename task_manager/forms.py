@@ -77,7 +77,7 @@ def validate_phone_number(
     phone_number,
 ):
     if len(phone_number) != 13:
-        raise ValidationError("License number should consist of 13 characters")
+        raise ValidationError("Phone number should consist of 13 characters")
     elif not phone_number[0] == "+":
         raise ValidationError("Phone number should start with a character '+'")
     elif not phone_number[1:].isdigit():
