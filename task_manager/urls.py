@@ -15,12 +15,11 @@ from task_manager.views import (
     TaskTypeCreateView,
     TaskTypeUpdateView,
     TaskTypeDeleteView,
-    toggle_assign_to_task,
     WorkerListView,
     WorkerDetailView,
     WorkerCreateView,
     WorkerUpdateView,
-    WorkerDeleteView,
+    WorkerDeleteView, ToggleAssignToTaskView,
 )
 
 urlpatterns = [
@@ -76,7 +75,7 @@ urlpatterns = [
     ),
     path(
         "cars/<int:pk>/toggle-assign/",
-        toggle_assign_to_task,
+        ToggleAssignToTaskView.as_view(),
         name="toggle-task-assign",
     ),
     path("workers/", WorkerListView.as_view(), name="worker-list"),
