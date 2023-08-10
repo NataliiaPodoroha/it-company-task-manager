@@ -179,7 +179,7 @@ class TaskTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 
 class ToggleAssignToTaskView(LoginRequiredMixin, generic.View):
-    def get(self, request, pk):
+    def post(self, request, pk):
         worker = get_object_or_404(Worker, id=request.user.id)
         task = get_object_or_404(Task, id=pk)
 

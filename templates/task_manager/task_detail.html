@@ -67,15 +67,18 @@
         <h3 class="mb-5">
           <span class="text-primary">Workers:</span>
           <div class="me-4 m-3 float-end">
-            {% if task in user.tasks.all %}
-              <a href="{% url 'task_manager:toggle-task-assign' pk=task.id %}" class="btn btn-sm btn-outline-danger w-auto">
-                Delete me from this task
-              </a>
-            {% else %}
-              <a href="{% url 'task_manager:toggle-task-assign' pk=task.id %}" class="btn btn-sm btn-outline-success w-auto">
-                Assign me to this task
-              </a>
-            {% endif %}
+            <form method="post" action="{% url 'task_manager:toggle-task-assign' pk=task.id %}">
+              {% csrf_token %}
+              {% if task not in user.tasks.all %}
+                <button type="submit" class="btn btn-sm btn-outline-success w-auto">
+                  Assign me to this task
+                </button>
+              {% else %}
+                <button type="submit" class="btn btn-sm btn-outline-danger w-auto">
+                  Delete me from this task
+                </button>
+              {% endif %}
+            </form>
           </div>
         </h3>
         <hr>
