@@ -1,3 +1,5 @@
+<img src="static/assets/img/favicon.png" width="50">
+
 # IT Company Task Manager
 
 A task manager which ensures task control and communication between team members at all stages of project development.
