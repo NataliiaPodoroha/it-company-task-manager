@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %} {{ task.id }} {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} blog-author bg-gray-100 {% endblock body_class %}
+
+{% block content %}
+
+  {% include "includes/navigation.html" %}
+
+   <section class="py-sm-5 py-5 position-relative">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <div class="row pt-7">
+
+            <div class="col-md-9 col-sm-6 col-6 mb-4">
+              <h1>{{ task.name }}</h1>
+            </div>
+            <div class="col-md-3 col-sm-6 col-6 mb-4">
+              <div class="m-3">
+              <a href="{% url 'task_manager:task-update' pk=task.id %}" class="btn btn-sm btn-outline-info w-auto">
+                Update
+              </a>
+              <a href="{% url 'task_manager:task-delete' pk=task.id %}" class="btn btn-sm btn-outline-secondary w-auto">
+                Delete
+              </a>
+              </div>
+            </div>
+
+          </div>
+          <div class="row mb-4">
+            <div class="col-auto">
+              <span>Type:</span>
+              <span class="h6">{{ task.task_type.name }}</span>
+            </div>
+            {% if task.is_completed == False %}
+            <div class="col-auto">
+              <span>Deadline:</span>
+              <span class="h6">{{ task.deadline }}</span>
+            </div>
+            <div class="col-auto">
+              <span>Status:</span>
+              <span class="h6 text-warning">Not completed</span>
+            </div>
+            {% else %}
+              <div class="col-auto">
+              <span>Status:</span>
+              <span class="h6 text-success">Completed</span>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="mb-5">
+          <span class="text-primary">Workers:</span>
+          <div class="me-4 m-3 float-end">
+            <form method="post" action="{% url 'task_manager:toggle-task-assign' pk=task.id %}">
+              {% csrf_token %}
+              {% if task not in user.tasks.all %}
+                <button type="submit" class="btn btn-sm btn-outline-success w-auto">
+                  Assign me to this task
+                </button>
+              {% else %}
+                <button type="submit" class="btn btn-sm btn-outline-danger w-auto">
+                  Delete me from this task
+                </button>
+              {% endif %}
+            </form>
+          </div>
+        </h3>
+        <hr>
+        <ul>
+          {% for worker in task.assignees.all %}
+          <li><a href="{{ worker.get_absolute_url }}">{{ worker.first_name }} {{ worker.last_name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="row pt-5">
+      <div class="col-lg-12">
+        <h3 class="mb-5">
+          <span class="text-primary">Description:</span>
+        </h3>
+        <hr>
+        <p>
+          {{ task.description }}
+        </p>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}

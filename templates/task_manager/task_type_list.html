@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Task Types{% endblock title %}
+
+{% block content %}
+  {% include "includes/navigation.html" %}
+  <header class="section-height-25">
+  </header>
+  <div class="container">
+    <h1>
+      Task Type List
+      <a href="{% url 'task_manager:task-type-create' %}" class="btn bg-gradient-secondary w-auto me-5 m-3 float-end">
+        Create
+      </a>
+    </h1>
+    <br>
+    {% block search %}
+      {% include "includes/search.html" %}
+    {% endblock %}
+    <br>
+    {% if task_type_list %}
+    <table class="table">
+      <tr>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 10%">ID</th>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 60%">Name</th>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 17%">Update</th>
+        <th class="text-gradient text-primary font-weight-bolder" style="width: 13%">Delete</th>
+      </tr>
+    {% for type in task_type_list %}
+      <tr>
+        <td>{{ type.id }}</td>
+        <td>{{ type.name }}</td>
+        <td>
+          <a href="{% url 'task_manager:task-type-update' pk=type.id %}" class="btn bg-gradient-info w-auto me-2 mb-0">
+            Update
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'task_manager:task-type-delete' pk=type.id %}" class="btn bg-gradient-light w-auto me-2 mb-0">
+            Delete
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+    {% include "includes/pagination.html" %}
+    {% else %}
+      <p>There are no task types in the company.</p>
+    {% endif %}
+  </div>
+{% endblock %}
+
