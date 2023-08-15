@@ -4,6 +4,14 @@
 
 A task manager which ensures task control and communication between team members at all stages of project development.
 
+## Check it out
+[It company task manager project deployed to Render](https://it-company-task-manager-ie08.onrender.com/)
+
+You may use such credentials:
+
+<b>Username:</b> test_user <br>
+<b>Password:</b> 4X0F2G%4DplF
+
 ## Installing / Getting started
 
 Python3 must be already installed
